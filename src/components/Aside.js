@@ -45,7 +45,7 @@ class Aside extends Component {
                 <style jsx="true">{`
                     .aside {
                         background: #678B8D;
-                        flex: 1;
+                        flex: 0 0 20vw;
                         padding: 1em;
                     }
                     button span {

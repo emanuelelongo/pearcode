@@ -6,7 +6,7 @@ export default function() {
                 .header {
                     background: #6B435A;
                     color: white;
-                    height: 10vh;
+                    height: 100px;
                     padding-left: 0.5em;
                 }
                 .pearImg {

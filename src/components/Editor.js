@@ -5,7 +5,7 @@ class Editor extends Component{
         return <Fragment>
             <style jsx="true">{`
                 #firepad {
-                    height: 67vh;
+                    height: calc(80vh - 125px);
                 }
             `}</style>
             <div id="firepad"></div>

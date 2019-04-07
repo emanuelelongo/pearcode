@@ -16,7 +16,7 @@ class Output extends Component {
                         border: 1px solid #ddd;
                         height: 20vh;
                         padding: 1em;
-                        overflow:scroll;
+                        overflow:auto;
                     }
                     .output pre {
                         margin:0;

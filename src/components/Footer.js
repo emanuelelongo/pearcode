@@ -4,11 +4,12 @@ export default function() {
     return <Fragment>
             <style jsx="true">{`
                 .footer {
-                    background: #6B435A;
-                    height: 3vh;
+                    background: gray;
+                    height: 25px;
                     text-align: center;
-                    color:gray;
+                    color:#6B435A;
                     padding-top: 0.2em;
+                    font-size: 12px;
                 }
             `}</style>
         <footer className='footer'>
