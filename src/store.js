@@ -8,11 +8,28 @@ class Store {
     @observable output = '';
 
     constructor() {
+        this.consolePatched = false;
+
         editor.onChangeLanguage((lang) => {
-            if(lang != this.language) {
+            if(lang && lang !== this.language) {
                 this.changeLanguage(lang);
             }
         });
+        editor.onChangeOutput((txt) => {
+           this.output = txt || '';
+        });
+    }
+
+    patchConsole() {
+        if(this.consolePatched) return;
+        this.consolePatched = true;
+
+        const backup_log = console.log;
+        console.log = (...args) => {
+            const line = args.join(' ');
+            editor.setOutput(this.output ? this.output + '\n' + line : line);
+            backup_log.apply(null, args);
+        }
     }
 
     @action loadLanguages = () => {
@@ -30,17 +47,14 @@ class Store {
     }
 
     @action run = () => {
-        const backup = console.log;
-        const lines = [];
-        console.log = (v) => lines.push(v);
+        this.patchConsole();
         try {
             eval(editor.getText());
         }
         catch(err) {
             console.log(err);
         }
-        this.output = lines.join('\n');
-        console.log = backup;
+        
     }
 }
 
