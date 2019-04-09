@@ -23,12 +23,14 @@ class Store {
     patchConsole() {
         if(this.consolePatched) return;
         this.consolePatched = true;
-
-        const backup_log = console.log;
-        console.log = (...args) => {
-            const line = args.join(' ');
-            editor.setOutput(this.output ? this.output + '\n' + line : line);
-            backup_log.apply(null, args);
+        const consoles = ['log', 'info', 'error'];
+        for(let c of consoles) {
+            let backup = console[c];
+            console[c] = (...args) => {    
+                const line = args.join(' ');
+                editor.setOutput(this.output ? this.output + '\n' + line : line);
+                backup.apply(null, args);
+            };
         }
     }
 
