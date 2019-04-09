@@ -23,7 +23,9 @@ class Output extends Component {
                         padding:0;
                     }
                 `}</style>
-            <div className='output'><pre>{output}</pre></div>
+            <div className='output'>
+                <pre>{output}</pre>
+            </div>
         </Fragment>
     )
     }

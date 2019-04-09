@@ -4,11 +4,16 @@ class Editor extends Component{
     render() {
         return <Fragment>
             <style jsx="true">{`
-                #firepad {
+                .firepad-container {
                     height: calc(80vh - 125px);
                 }
+                #firepad {
+                    height: 100%;
+                }
             `}</style>
-            <div id="firepad"></div>
+            <div className="firepad-container">
+                <div id="firepad"></div>
+            </div>
         </Fragment>
     }
 }

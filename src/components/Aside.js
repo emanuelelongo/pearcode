@@ -17,6 +17,9 @@ class Aside extends Component {
     run() {
         this.props.store.run();
     }
+    clear() {
+        this.props.store.clearOutput();
+    }
     render() {
         const store = this.props.store;
 
@@ -28,6 +31,9 @@ class Aside extends Component {
                         flex: 0 0 20vw;
                         padding: 1em;
                     }
+                    .aside * {
+                        margin: 10px;
+                    }
                     button span {
                         font-size: 2em;
                     }
@@ -38,12 +44,18 @@ class Aside extends Component {
                             { store.languages.map(lang => <option key={lang.id} value={lang.id}>{lang.name}</option>) }
                         </select>
                     </div>
-                    <br />
                     <div>
-                        <button disabled={!store.runnable} onClick={this.run.bind(this)}>
-                            <span role="img" aria-label="run">🚀</span>
+                        <button className="btn" disabled={!store.runnable} onClick={this.run.bind(this)}>
+                            <span role="img" aria-label="run">🎬</span>
                             <br />
-                            LAUNCH
+                            RUN
+                        </button>
+                    </div>
+                    <div>
+                        <button className="btn" onClick={this.clear.bind(this)}>
+                            <span role="img" aria-label="clear">📋</span>
+                            <br />
+                            CLEAR
                         </button>
                     </div>
                 </aside>

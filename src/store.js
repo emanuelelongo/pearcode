@@ -56,7 +56,10 @@ class Store {
         catch(err) {
             console.log(err);
         }
-        
+    }
+
+    @action clearOutput = () => {
+        this.output = '';
     }
 }
 
