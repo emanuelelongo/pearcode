@@ -67,7 +67,8 @@
                     var editor = monaco.editor.create(
                         document.getElementById('firepad'),
                         {
-                            model
+                            model,
+                            minimap: {enabled: false}
                         }
                     );
                     window.firepad = Firepad.fromMonaco(firepadRef, editor);
