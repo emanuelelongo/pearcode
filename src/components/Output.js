@@ -13,18 +13,21 @@ class Output extends Component {
                 <style jsx="true">{`
                     .output {
                         background: #ddd;
-                        border: 1px solid #ddd;
+                        border: 1px solid #ccc;
                         height: 20vh;
-                        padding: 1em;
-                        overflow:auto;
+                        padding: 0.5em;
+                        overflow: hidden;
                     }
-                    .output pre {
-                        margin:0;
-                        padding:0;
+                    .output textarea {
+                        border:none;
+                        outline: none;
+                        background: #ddd;
+                        width: 100%;
+                        height: 100%;
                     }
                 `}</style>
             <div className='output'>
-                <pre>{output}</pre>
+                <textarea readOnly value={output}></textarea>
             </div>
         </Fragment>
     )

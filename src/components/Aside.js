@@ -45,8 +45,12 @@ class Aside extends Component {
                         </select>
                     </div>
                     <div>
-                        <button className="btn" disabled={!store.runnable} onClick={this.run.bind(this)}>
-                            <span role="img" aria-label="run">🎬</span>
+                        <button className="btn" disabled={!store.runnable || store.running} onClick={this.run.bind(this)}>
+                            {
+                                store.running
+                                    ? <span role="img" aria-label="running">⌛</span>
+                                    : <span role="img" aria-label="run">🎬</span>
+                            }
                             <br />
                             RUN
                         </button>

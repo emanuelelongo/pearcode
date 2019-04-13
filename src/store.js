@@ -5,6 +5,7 @@ class Store {
     @observable languages = [];
     @observable language = 'javascript';
     @observable runnable = true;
+    @observable running = false;
     @observable output = '';
 
     constructor() {
@@ -49,6 +50,16 @@ class Store {
     }
 
     @action run = () => {
+        this.running = true;
+        switch(this.language) {
+            case 'javascript': this.runJavascript().then(() => this.running = false);
+                break;
+            case 'csharp': this.runCsharp().then(() => this.running = false);
+                break;
+        }
+    }
+
+    runJavascript() {
         this.patchConsole();
         try {
             eval(editor.getText());
@@ -56,10 +67,16 @@ class Store {
         catch(err) {
             console.log(err);
         }
+        return Promise.resolve();
+    }
+
+    runCsharp() {
+        return fetch(`https://runner.pearcode.it/csharp?id=${editor.getId()}`, {method: 'POST'});
     }
 
     @action clearOutput = () => {
         this.output = '';
+        editor.setOutput(this.output);
     }
 }
 

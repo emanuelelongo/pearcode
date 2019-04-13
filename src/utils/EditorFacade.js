@@ -4,7 +4,7 @@ const ready = () => {
         window.addEventListener('load', () => resolve())
     })
 };
-const runnableLanguages = {"javascript": true};
+const runnableLanguages = {"javascript": true, "csharp": true};
 
 export default {
     getText: () => window.firepad.getText(),
@@ -37,5 +37,9 @@ export default {
         ready().then(() => {
             window.firepad.firebaseAdapter_.ref_.child("output").on("value", (value) => cb(value.val()));
         });
+    },
+
+    getId: () => {
+        return window.location.hash.replace(/#/g, '');
     }
 }
