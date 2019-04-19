@@ -4,7 +4,8 @@ const ready = () => {
         window.addEventListener('load', () => resolve())
     })
 };
-const runnableLanguages = {"javascript": true, "csharp": true};
+
+const runnableLanguages = {"javascript": true, "csharp": true, "python": true};
 
 export default {
     getText: () => window.firepad.getText(),
