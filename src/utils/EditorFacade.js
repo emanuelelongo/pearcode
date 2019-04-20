@@ -5,8 +5,6 @@ const ready = () => {
     })
 };
 
-const runnableLanguages = {"javascript": true, "csharp": true, "python": true};
-
 export default {
     getText: () => window.firepad.getText(),
 
@@ -14,18 +12,15 @@ export default {
         return window.monaco.languages.getLanguages()
             .map(i => ({
                 id: i.id, 
-                name: i.aliases[0],
-                runnable: runnableLanguages[i.id]
+                name: i.aliases[0]
             }))
     }),
 
     setLanguage: lang => {
-        window.monaco.editor.setModelLanguage(window.firepad.monaco_.getModel(), lang);
-        window.firepad.firebaseAdapter_.ref_.child('language').set(lang);
-    },
-
-    setOutput: txt => {
-        window.firepad.firebaseAdapter_.ref_.child('output').set(txt);
+        ready().then(() => {
+            window.monaco.editor.setModelLanguage(window.firepad.monaco_.getModel(), lang);
+            window.firepad.firebaseAdapter_.ref_.child('language').set(lang);
+        });
     },
 
     onChangeLanguage: cb => {
@@ -34,13 +29,27 @@ export default {
         });
     },
 
+    setOutput: txt => {
+        window.firepad.firebaseAdapter_.ref_.child('output').set(txt);
+    },
+
     onChangeOutput: cb => {
         ready().then(() => {
             window.firepad.firebaseAdapter_.ref_.child("output").on("value", (value) => cb(value.val()));
         });
     },
 
-    getId: () => {
+    setSelectedOptions: options => {
+        window.firepad.firebaseAdapter_.ref_.child('selectedOptions').set(options);
+    },
+
+    onSelectedOptionsChange: cb => {
+        ready().then(() => {
+            window.firepad.firebaseAdapter_.ref_.child("selectedOptions").on("value", (value) => cb(value.val()));
+        });
+    },
+
+    getSessionId: () => {
         return window.location.hash.replace(/#/g, '');
     }
 }

@@ -4,22 +4,24 @@ import { inject, observer } from "mobx-react";
 @inject('store')
 @observer
 class Aside extends Component {
-
-    componentDidMount() {
-        this.props.store.loadLanguages();
-    }
     
     changeLanguage(event) {
         const lang = event.target.value;
         this.props.store.changeLanguage(lang);
     }
 
+    selectOption(option, value) {
+        this.props.store.selectOption(option, value);
+    }
+
     run() {
         this.props.store.run();
     }
+    
     clear() {
         this.props.store.clearOutput();
     }
+
     render() {
         const store = this.props.store;
 
@@ -34,16 +36,30 @@ class Aside extends Component {
                     .aside * {
                         margin: 10px;
                     }
+                    .aside .label {
+                        margin-top: 5px;
+                    }
                     button span {
                         font-size: 2em;
                     }
                 `}</style>
                 <aside className='aside'>
                     <div>
+                        <div>Language</div>
                         <select value={store.language} onChange={this.changeLanguage.bind(this)}>
                             { store.languages.map(lang => <option key={lang.id} value={lang.id}>{lang.name}</option>) }
                         </select>
                     </div>
+                    {
+                        store.options.map(opt =>
+                            <div key={opt.name}>
+                                <div>{opt.name}</div>
+                                <select value={store.selectedOptions[opt.name]} onChange={(event) => this.selectOption(opt.name, event.target.value)}>
+                                    { opt.values.map(value=> <option key={value} value={value}>{value}</option>) }
+                                </select>
+                            </div>
+                        )
+                    }
                     <div>
                         <button className="btn" disabled={!store.runnable || store.running} onClick={this.run.bind(this)}>
                             {

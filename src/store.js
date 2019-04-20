@@ -1,24 +1,19 @@
 import { action, observable } from 'mobx';
 import editor from './utils/EditorFacade';
+import config from './config';
 
 class Store {
     @observable languages = [];
-    @observable language = 'javascript';
-    @observable runnable = true;
+    @observable language = '';
+    @observable runnable = false;
     @observable running = false;
+    @observable options = [];
+    @observable selectedOptions = {};
     @observable output = '';
 
     constructor() {
         this.consolePatched = false;
-
-        editor.onChangeLanguage((lang) => {
-            if(lang && lang !== this.language) {
-                this.changeLanguage(lang);
-            }
-        });
-        editor.onChangeOutput((txt) => {
-           this.output = txt || '';
-        });
+        this.loadLanguages();
     }
 
     patchConsole() {
@@ -35,7 +30,7 @@ class Store {
         }
     }
 
-    @action loadLanguages = () => {
+    loadLanguages() {
         editor
             .getLanguages()
             .then((languages) => {
@@ -43,26 +38,49 @@ class Store {
             });
     }
 
-    @action changeLanguage = (lang) => {
-        editor.setLanguage(lang);
+    @action initLanguage(lang) {
         this.language = lang;
-        this.runnable = this.languages.find(i => i.id===lang).runnable;
-    }
-
-    @action run = () => {
-        this.running = true;
-        switch(this.language) {
-            case 'javascript': this.runJavascript().then(() => this.running = false);
-                break;
-            case 'csharp': this.runCsharp().then(() => this.running = false);
-                break;
+        this.runnable = false;
+        this.options = [];
+        this.selectedOptions = {};
+        if(config.languages[lang]) {
+            this.runnable = config.languages[lang].runnable;
+            this.options = config.languages[lang].options || [];
+            this.selectedOptions = this.options.reduce(
+		        (acc, cur)=>{acc[cur.name] = cur.values[0]; return acc;}, {}); 
         }
+        editor.setLanguage(this.language);
     }
 
-    runJavascript() {
+    @action changeLanguage = (lang) => {
+        this.initLanguage(lang);
+        editor.setSelectedOptions(this.selectedOptions);
+    }
+
+    @action run = async () => {
+        this.running = true;
+        this.clearOutput();
+        
+        if(this.language === 'javascript' && this.selectedOptions["Environment"] === "Browser") {
+            await this.runJavascriptOnBrowser();
+        }
+        else {
+            await this.runOnServer();
+        }
+
+        this.running = false;
+    }
+
+    @action selectOption = (optionName, value) => {
+        this.selectedOptions[optionName] = value;
+        editor.setSelectedOptions(this.selectedOptions);
+    }
+
+    runJavascriptOnBrowser() {
         this.patchConsole();
+        const text = editor.getText();
         try {
-            eval(editor.getText());
+            eval(text);
         }
         catch(err) {
             console.log(err);
@@ -70,8 +88,15 @@ class Store {
         return Promise.resolve();
     }
 
-    runCsharp() {
-        return fetch(`https://runner.pearcode.it/csharp?id=${editor.getId()}`, {method: 'POST'});
+    runOnServer() {
+        const sessionId = editor.getSessionId();
+        return fetch(`${config.runnerEndPoint}/run`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({sessionId})
+        });
     }
 
     @action clearOutput = () => {
