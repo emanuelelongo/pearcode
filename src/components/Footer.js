@@ -13,7 +13,7 @@ export default function() {
                 }
             `}</style>
         <footer className='footer'>
-            Pear Code - Copyright 2019 - Emanuele Longo
+            Pear Code - Copyright (c) 2019 Emanuele Longo
         </footer>
         </Fragment>
 }

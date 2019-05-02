@@ -10,7 +10,7 @@ You can find it up and running here: [www.pearcode.it](https://www.pearcode.it)
 * Debugging
 * Quick and easly shareable code snippets
 
-## Pear Code Runner
+## Pear Code Runner 🏃
 
 Pear Code editor can **execute** some languages and show theirs output straight in your browser!
 This is made possible thanks to the related project [Pear Code runner](https://github.com/emanuelelongo/pearcode-runner) to which you can refer to know the exact list of supported languages.

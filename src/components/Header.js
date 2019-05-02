@@ -21,6 +21,11 @@ export default function() {
                     font-size: 1.6em;
                     font-family: 'Roboto Mono', monospace;
                 }
+                .description {
+                    position: absolute;
+                    right: 20vw;
+                    font-size: 0.4em;
+                }
             `}</style>
         <header className='header'>
             <h1>
@@ -28,6 +33,7 @@ export default function() {
                 <span className="pear">Pear</span>
                 &nbsp;
                 <span className="code">code_</span>
+                <span className="description">share the URL, enjoy!</span>
             </h1>
         </header>
         </Fragment>
