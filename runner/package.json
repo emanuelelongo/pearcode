@@ -1,0 +1,30 @@
+{
+  "name": "pearcode-runner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emanuelelongo/pearcode-runner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emanuelelongo/pearcode-runner/issues"
+  },
+  "homepage": "https://github.com/emanuelelongo/pearcode-runner#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "eol": "^0.9.1",
+    "express": "^4.16.4",
+    "firebase": "^5.9.3",
+    "firepad": "^1.5.3",
+    "js-yaml": "^3.13.1",
+    "lodash.merge": "^4.6.1",
+    "shell-escape": "^0.2.0",
+    "shelljs": "^0.8.3"
+  }
+}

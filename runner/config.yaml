@@ -1,0 +1,14 @@
+port: 8080
+basePath:
+runAsUserId:
+firebase:
+    apiKey: AIzaSyCDxlpZXjhfYyJxMSoKmxcRVRwoTvhngh0
+    databaseURL: https://pear-code.firebaseio.com
+languages:
+    javascript:
+        repl: true
+    csharp:
+        main: Program.cs
+        repl: false
+    python:
+        repl: true
