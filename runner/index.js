@@ -12,7 +12,7 @@ const config = configEnvOverrides(defaultConfig);
 const runner = new Runner(config);
 
 const app = express();
-app.use(cors({origin: ['https://www.pearcode.it', 'http://localhost:3000']}));
+app.use(cors({origin: ['https://pearcode.it', 'https://www.pearcode.it', 'http://localhost:3000']}));
 app.use(bodyParser.json());
 
 app.post('/run', async (req, res) => {
