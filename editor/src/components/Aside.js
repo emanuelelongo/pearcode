@@ -42,10 +42,15 @@ class Aside extends Component {
                     button span {
                         font-size: 2em;
                     }
+                    .link {
+                        color: #6B435A;
+                        font-weight: bold;
+                        text-decoration: none;
+                    }
                 `}</style>
                 <aside className='aside'>
                     <div>
-                        <div>Language</div>
+                        <div>Language <a className="link" href="https://github.com/emanuelelongo/pearcode#supported-languages-so-far" title="Which languages are executable?">[?]</a></div>
                         <select value={store.language} onChange={this.changeLanguage.bind(this)}>
                             { store.languages.map(lang => <option key={lang.id} value={lang.id}>{lang.name}</option>) }
                         </select>
