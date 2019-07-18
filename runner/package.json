@@ -23,7 +23,6 @@
     "firebase": "^5.9.3",
     "firepad": "^1.5.3",
     "js-yaml": "^3.13.1",
-    "lodash.merge": "^4.6.1",
     "shell-escape": "^0.2.0",
     "shelljs": "^0.8.3"
   }

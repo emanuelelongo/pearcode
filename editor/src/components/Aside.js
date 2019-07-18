@@ -50,7 +50,7 @@ class Aside extends Component {
                 `}</style>
                 <aside className='aside'>
                     <div>
-                        <div>Language <a className="link" href="https://github.com/emanuelelongo/pearcode#supported-languages-so-far" title="Which languages are executable?">[?]</a></div>
+                        <div>Language <a className="link" href="https://github.com/emanuelelongo/pearcode#supported-languages-so-far" title="What languages are executable?">[?]</a></div>
                         <select value={store.language} onChange={this.changeLanguage.bind(this)}>
                             { store.languages.map(lang => <option key={lang.id} value={lang.id}>{lang.name}</option>) }
                         </select>
