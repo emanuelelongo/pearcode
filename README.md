@@ -28,6 +28,7 @@ Supported languages:
 * Node.js
 * C#
 * Python (version 2 and 3)
+* Java (version 8)
 
 ## Project structure at glance
 

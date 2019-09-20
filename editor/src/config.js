@@ -24,6 +24,9 @@ const common = {
                 "name": "Version",
                 "values": ["2", "3"]
             }]
+        },
+        "java": {
+            "runnable": true
         }
     }
 }

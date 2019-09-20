@@ -12,3 +12,6 @@ languages:
         repl: false
     python:
         repl: true
+    java:
+        main: Program.java
+        repl: false
