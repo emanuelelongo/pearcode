@@ -2,14 +2,17 @@ const firebase = require('firebase');
 const firepad = require('firepad');
 
 class RemoteEditorClient {
-    constructor(config) {
-        firebase.initializeApp(config.firebase);
+    constructor() {
+        firebase.initializeApp({
+            apiKey: process.env['FIREBASE_API_KEY'],
+            databaseURL: process.env['FIREBASE_DATABASE_URL']
+        });
         this.firebaseRef = firebase.database().ref();
     }
 
     getText(sessionId) {
         const headless = new firepad.Headless(this.firebaseRef.child(sessionId));
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             headless.getText((text) => resolve(text));
         });
     }

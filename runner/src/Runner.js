@@ -1,4 +1,7 @@
 const sh = require('shelljs');
+const fs = require('fs');
+const path = require('path');
+const yaml = require('js-yaml');
 const RemoteEditorClient = require('./remoteEditorClient');
 const initSession = require('./initSession');
 const writeDownUserCode = require('./writeDownUserCode');
@@ -6,16 +9,16 @@ const runSession = require('./runSession');
 const runRepl = require('./runRepl');
 
 class Runner {
-    constructor(config) {
-        this.config = config;
-        this.editor = new RemoteEditorClient(this.config);
-        sh.env['BASE_PATH'] = config.basePath;
-        sh.env['RUN_AS_USER_ID'] = config.runAsUserId;
+    constructor() {
+        this.config = yaml.safeLoad(fs.readFileSync(path.join(__dirname, 'languages', 'config.yml'), 'utf8'));
+        this.editor = new RemoteEditorClient();
+        sh.env['SESSIONS_PATH'] = process.env['SESSIONS_PATH'];
+        sh.env['RUN_AS_USER_ID'] = process.env['RUN_AS_USER_ID'];
     }
 
     async run(sessionId) {
         const session = await this.editor.getSession(sessionId);
-        const { language, text, options } = session;
+        const { language } = session;
         const langConfig = this.config.languages[language];
 
         try {
@@ -24,8 +27,8 @@ class Runner {
                 output = await runRepl(session, this.config);
             }
             else {
-                await initSession(session, this.config);
-                await writeDownUserCode(session, this.config);
+                await initSession(session);
+                await writeDownUserCode(session, langConfig);
                 output = await runSession(session, this.config);
             }
 

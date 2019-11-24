@@ -1,12 +1,12 @@
 const fs = require('fs');
 const eol = require('eol');
 
-module.exports = (session, config) => {
+module.exports = (session, langConfig) => {
     const { sessionId, language, text } = session;
-    const main = config.languages[language].main;
+    const main = langConfig.main;
 
     return new Promise((resolve, reject) => {
-        fs.writeFile(`${config.basePath}/languages/${language}/sessions/${sessionId}/${main}`, eol.auto(text), err =>  {
+        fs.writeFile(`${process.env['SESSIONS_PATH']}/${language}/${sessionId}/${main}`, eol.auto(text), err =>  {
             if(err) 
                 reject(err);
             else

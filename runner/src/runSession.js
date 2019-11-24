@@ -6,7 +6,7 @@ module.exports = (session, config) => {
 
     return new Promise((resolve, reject) => {
         const env = optionsToEnv(options);
-        sh.exec(`${env} ${config.basePath}/languages/${language}/run.sh ${sessionId}`, (returnCode, output, err) => {
+        sh.exec(`${env} ${config.basePath}/languages/${language}/run.sh ${sessionId}`, (_returnCode, output, err) => {
             if(err) return reject(err);
             resolve(output);
         });
