@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const Runner = require('./Runner');
 
-const listeningPort = process.env.LISTENINING_PORT;
+const listeningPort = process.env.LISTENING_PORT;
 const corsAllowedDomains = process.env.CORS_ALLOWED_DOMAINS.split(',');
 
 const runner = new Runner();
@@ -25,4 +25,5 @@ app.post('/run', async (req, res) => {
 });
 app.listen(listeningPort,() => {
     console.log(`Listening on port ${listeningPort}`);
+    console.log(`User session will be saved in ${process.env.SESSIONS_PATH}`);
 });
