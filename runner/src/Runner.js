@@ -24,12 +24,12 @@ class Runner {
         try {
             let output = '';
             if(langConfig.repl) {
-                output = await runRepl(session, this.config);
+                output = await runRepl(session);
             }
             else {
                 await initSession(session);
                 await writeDownUserCode(session, langConfig);
-                output = await runSession(session, this.config);
+                output = await runSession(session);
             }
 
             this.editor.setOutput(sessionId, output);

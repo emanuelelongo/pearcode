@@ -1,6 +1,8 @@
-FROM node:10.16.3
+FROM docker
+RUN apk add --update nodejs && \
+    apk add --update npm
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-CMD ["node", "src/server.js"]
+CMD [ "/usr/bin/node", "src/server.js" ]

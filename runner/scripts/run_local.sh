@@ -12,6 +12,7 @@ IMAGE_TAG=$1
 shift
 
 docker run --rm \
+    -v /var/run/docker.sock:/var/run/docker.sock \
     --name pearcode-runner \
     -p 8080:8080 \
     --env LISTENING_PORT=$LISTENING_PORT \

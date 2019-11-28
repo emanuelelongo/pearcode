@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 buildOut=$(docker run --rm -i \
     -v $SESSIONS_PATH/csharp/$1:/sessions/$1 \
     --workdir /sessions/$1 \
