@@ -6,12 +6,9 @@ module.exports = (session, langConfig) => {
     const main = langConfig.main;
 
     return new Promise((resolve, reject) => {
-        fs.writeFile(`${process.env['CONTAINER_SESSIONS_PATH']}/${language}/${sessionId}/${main}`, eol.auto(text), err =>  {
-            if(err) {
-                reject(err);
-            }
-            else
-                resolve();
+        fs.writeFile(`/sessions/${language}/${sessionId}/${main}`, eol.auto(text), err => {
+            if (err) reject(err);
+            else resolve();
         });
     });
 };

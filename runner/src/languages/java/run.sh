@@ -11,7 +11,7 @@ if [ $buildExitCode -ne 0 ]; then
     exit $buildExitCode
 fi
 
-chown -R $RUN_AS_USER_ID ${SESSIONS_PATH}/java/sessions/$1
+chown -R $RUN_AS_USER_ID /sessions/java/sessions/$1
 
 docker run --rm -i \
     --network="none" \
