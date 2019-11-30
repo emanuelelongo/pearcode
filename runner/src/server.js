@@ -25,5 +25,5 @@ app.post('/run', async (req, res) => {
 });
 app.listen(listeningPort,() => {
     console.log(`Listening on port ${listeningPort}`);
-    console.log(`User session will be saved in ${process.env.SESSIONS_PATH}`);
+    console.log(`User session will be saved in ${process.env.LOCAL_SESSIONS_PATH}`);
 });

@@ -12,8 +12,10 @@ class Runner {
     constructor() {
         this.config = yaml.safeLoad(fs.readFileSync(path.join(__dirname, 'languages', 'config.yml'), 'utf8'));
         this.editor = new RemoteEditorClient();
-        sh.env['SESSIONS_PATH'] = process.env['SESSIONS_PATH'];
+        sh.env['LOCAL_SESSIONS_PATH'] = process.env['LOCAL_SESSIONS_PATH'];
+        sh.env['CONTAINER_SESSIONS_PATH'] = process.env['CONTAINER_SESSIONS_PATH'];
         sh.env['RUN_AS_USER_ID'] = process.env['RUN_AS_USER_ID'];
+        //TODO: check other variables to pass
     }
 
     async run(sessionId) {
