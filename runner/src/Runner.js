@@ -12,8 +12,17 @@ class Runner {
     constructor() {
         this.config = yaml.safeLoad(fs.readFileSync(path.join(__dirname, 'languages', 'config.yml'), 'utf8'));
         this.editor = new RemoteEditorClient();
-        sh.env['SESSIONS_PATH'] = process.env['SESSIONS_PATH'];
-        sh.env['RUN_AS_USER_ID'] = process.env['RUN_AS_USER_ID'];
+        this.dataPath = process.env.DATA_PATH;
+        this.runInDocker = process.env.RUN_IN_DOCKER;
+        this.mountPath = this.runInDocker ? '/sessions' : this.dataPath;
+        this.runAsUserId = process.env.RUN_AS_USER_ID;
+        this.configureSh();
+    }
+
+    configureSh() {
+        sh.env['DATA_PATH'] = this.dataPath;
+        sh.env['MOUNT_PATH'] = this.mountPath;
+        sh.env['RUN_AS_USER_ID'] = this.runAsUserId;
     }
 
     async run(sessionId) {
@@ -28,7 +37,7 @@ class Runner {
             }
             else {
                 await initSession(session);
-                await writeDownUserCode(session, langConfig);
+                await writeDownUserCode(this.mountPath, session, langConfig);
                 output = await runSession(session);
             }
 

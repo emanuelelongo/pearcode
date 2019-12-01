@@ -6,8 +6,8 @@ IMAGE_TAG=$(shell git rev-parse --short HEAD)
 build:
 	sh -c "scripts/build.sh $(IMAGE_NAME) $(IMAGE_TAG)"
 
-run_local:
-	sh -c "scripts/run_local.sh $(IMAGE_NAME) $(IMAGE_TAG)"
+run_docker:
+	sh -c "scripts/run_docker.sh $(IMAGE_NAME) $(IMAGE_TAG)"
 
 push:
 	sh -c "scripts/push.sh $(IMAGE_NAME) $(IMAGE_TAG)"

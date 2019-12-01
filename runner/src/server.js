@@ -7,7 +7,6 @@ const listeningPort = process.env.LISTENING_PORT;
 const corsAllowedDomains = process.env.CORS_ALLOWED_DOMAINS.split(',');
 
 const runner = new Runner();
-
 const app = express();
 app.use(cors({origin: corsAllowedDomains}));
 app.use(bodyParser.json());
@@ -25,5 +24,5 @@ app.post('/run', async (req, res) => {
 });
 app.listen(listeningPort,() => {
     console.log(`Listening on port ${listeningPort}`);
-    console.log(`User session will be saved in ${process.env.SESSIONS_PATH}`);
+    console.log(`User session will be saved in ${process.env.DATA_PATH}`);
 });
