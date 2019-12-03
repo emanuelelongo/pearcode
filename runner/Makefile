@@ -9,6 +9,3 @@ build:
 run_docker:
 	sh -c "scripts/run_docker.sh $(IMAGE_NAME) $(IMAGE_TAG)"
 
-push:
-	sh -c "scripts/push.sh $(IMAGE_NAME) $(IMAGE_TAG)"
-

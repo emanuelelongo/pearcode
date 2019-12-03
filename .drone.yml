@@ -1,0 +1,20 @@
+---
+kind: pipeline
+name: default
+
+trigger:
+  branch:
+  - dockerize
+
+steps:
+- name: push runner artifact to docker hub
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: emanuelelongo/pearcode
+    tag: beta
+    context: runner
+    dockerfile: runner/Dockerfile
