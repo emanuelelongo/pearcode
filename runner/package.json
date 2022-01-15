@@ -24,6 +24,6 @@
     "firepad": "^1.5.3",
     "js-yaml": "^3.13.1",
     "shell-escape": "^0.2.0",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.5"
   }
 }
